@@ -7,16 +7,22 @@ import bitcamp.pms.annotation.Controller;
 import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.domain.Board;
+import bitcamp.pms.domain.Member;
 import bitcamp.pms.util.CommandUtil;
+import bitcamp.pms.util.Session;
 
 @Controller
 @RequestMapping("board/") // 매핑 정보 일부를 선언한다.
 public class BoardController {
-/*
+  
   private BoardDao boardDao;
-
   public void setBoardDao(BoardDao boardDao) {
     this.boardDao = boardDao;
+  }
+  
+  Session session;
+  public void setSession(Session session) {
+    this.session = session;
   }
 
   @RequestMapping("add.do") // 매핑 정보 나머지를 선언한다.
@@ -29,6 +35,9 @@ public class BoardController {
     board.setContent(keyScan.nextLine());
     System.out.print("암호? ");
     board.setPassword(keyScan.nextLine());
+    
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    board.setAuth(loginUser.getName());
     
     if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
       try {
@@ -71,7 +80,7 @@ public class BoardController {
       
       for (Board board : boards) {
         System.out.printf("%d, %s, %d, %s\n", 
-          board.getNo(), board.getTitle(), board.getViews(), board.getCreatedDate());
+          board.getBno(), board.getTitle(), board.getViews(), board.getCreatedDate());
       }
     } catch (Exception e) {
       throw new RuntimeException("게시물 데이터 로딩 실패!", e);
@@ -93,6 +102,10 @@ public class BoardController {
       board.setTitle(keyScan.nextLine());
       System.out.printf("내용(%s)? ", board.getContent());
       board.setContent(keyScan.nextLine());
+      System.out.print("암호? ");
+      board.setPassword(keyScan.nextLine());
+      Member loginUser = (Member)session.getAttribute("loginUser");
+      board.setAuth(loginUser.getName());
   
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
         int count = boardDao.update(board);
@@ -109,5 +122,5 @@ public class BoardController {
       System.out.println("데이터 처리에 실패했습니다.");
     }
   }
-*/
+
 }
