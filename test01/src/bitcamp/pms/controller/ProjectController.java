@@ -30,7 +30,7 @@ public class ProjectController {
     project.setStartDate(Date.valueOf(keyScan.nextLine()));
     
     System.out.print("종료일? ");
-    project.setStartDate(Date.valueOf(keyScan.nextLine()));
+    project.setEndDate(Date.valueOf(keyScan.nextLine()));
 
     
     if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
@@ -48,7 +48,7 @@ public class ProjectController {
   @RequestMapping("delete.do")
   public void delete(Scanner keyScan) {
     try {
-      System.out.print("삭제할 회원 번호는? ");
+      System.out.print("삭제할 프로젝트 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
@@ -77,14 +77,14 @@ public class ProjectController {
             Project.getTitle(), Project.getStartDate(), Project.getEndDate());
       }
     } catch (Exception e) {
-      throw new RuntimeException("회원 데이터 로딩 실패!", e);
+      throw new RuntimeException("프로젝트 데이터 로딩 실패!", e);
     }
   }
   
   @RequestMapping("update.do")
   public void update(Scanner keyScan) {
     try {
-      System.out.print("변경할 회원 번호는? ");
+      System.out.print("변경할 프로젝트 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
       Project project = ProjectDao.selectOne(no);

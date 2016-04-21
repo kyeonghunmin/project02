@@ -103,8 +103,7 @@ public class MemberController {
       System.out.print("변경할 회원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
-      Member member = memberDao.selectOne(no);
-      System.out.println("오류오류");
+      Member member = memberDao.selectOne(no);    
       if (member == null) {
         System.out.println("유효하지 않은 번호입니다.");
         return;
