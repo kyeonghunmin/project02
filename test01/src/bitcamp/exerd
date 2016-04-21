@@ -19,9 +19,6 @@ DROP TABLE IF EXISTS EDU RESTRICT;
 -- 인적정보
 DROP TABLE IF EXISTS ID RESTRICT;
 
--- 이메일
-DROP TABLE IF EXISTS EMAIL RESTRICT;
-
 -- 팀멤버
 DROP TABLE IF EXISTS PJTT RESTRICT;
 
@@ -167,12 +164,6 @@ CREATE INDEX IX_ID
     INM ASC -- 이름
   );
 
--- 이메일
-CREATE TABLE EMAIL (
-  INO VARCHAR(255) NULL COMMENT '인적정보번호' -- 인적정보번호
-)
-COMMENT '이메일';
-
 -- 팀멤버
 CREATE TABLE PJTT (
   PNO VARCHAR(255) NOT NULL COMMENT '프로젝트번호', -- 프로젝트번호
@@ -266,16 +257,6 @@ ALTER TABLE EDU
     )
     REFERENCES MNG ( -- 매니저
       INO -- 매니저번호
-    );
-
--- 이메일
-ALTER TABLE EMAIL
-  ADD CONSTRAINT FK_ID_TO_EMAIL -- 인적정보 -> 이메일
-    FOREIGN KEY (
-      INO -- 인적정보번호
-    )
-    REFERENCES ID ( -- 인적정보
-      INO -- 인적정보번호
     );
 
 -- 팀멤버
