@@ -162,11 +162,6 @@ ALTER TABLE ID
       INO -- 인적정보번호
     );
 
--- 인적정보 유니크 인덱스
-CREATE UNIQUE INDEX UIX_ID
-  ON ID ( -- 인적정보
-  );
-
 -- 인적정보 인덱스
 CREATE INDEX IX_ID
   ON ID( -- 인적정보
