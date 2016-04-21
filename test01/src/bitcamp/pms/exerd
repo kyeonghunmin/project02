@@ -290,3 +290,6 @@ ALTER TABLE PJTT
     REFERENCES STU ( -- 학생
       INO -- 학생번호
     );
+    
+insert into ID (INM, AGE, GEND, TEL, STEP, PASS, EMAIL)
+values('곽용호',30,'남자','111-1111','대졸','1111','kwak@test.com');
