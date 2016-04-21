@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Project {
   private int     pno;
-  private String  inol;
+  private int  inol;
   private int     inot;
   private String  title;
   private Date    startDate;
@@ -28,10 +28,10 @@ public int getPno() {
 public void setPno(int pno) {
 	this.pno = pno;
 }
-public String getInol() {
+public int getInol() {
 	return inol;
 }
-public void setInol(String inol) {
+public void setInol(int inol) {
 	this.inol = inol;
 }
 public int getInot() {
