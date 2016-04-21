@@ -33,13 +33,13 @@
   </insert>
   
   <update id="update" parameterType="Member">
-    update MEMBERS set
+    update ID set
       INM=#{name},
       AGE=#{age},
-      GEND=#{gender}
-      TEL=#{tel}
-      STEP=#{step}
-      PASS=#{password}
+      GEND=#{gender},
+      TEL=#{tel},
+      STEP=#{step},
+      PASS=#{password},
       EMAIL=#{email}
     where INO=#{ino}
   </update>
@@ -64,7 +64,7 @@
   <select id="selectOne" parameterType="map" resultMap="MemberMap">
     <include refid="select01"/>
     where 
-    <if test="no != null">
+    <if test="ino != null">
       INO=#{ino}
     </if>
     <if test="email != null">
