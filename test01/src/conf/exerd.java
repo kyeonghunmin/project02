@@ -288,3 +288,13 @@ ALTER TABLE PJTT
     
 insert into ID (INM, AGE, GEND, TEL, STEP, PASS, EMAIL)
 values('곽용호',30,'남자','111-1111','대졸','1111','kwak@test.com');
+
+insert into EDU (TITL,ROOM)
+values('자바&DB 80기','401호');
+
+insert into PJT(TITL,ST_DT,EN_DT,DES,STATE,NUMB,SLOG,CR_DT)
+values('lollol','2016-04-21','2016-06-21','롤을 하자', 80,5,'스웨인 장인','2016-04-21');
+
+
+insert into BOD(TITL,CONT,VIEWS,PASS,CR_DT,AUTH)
+values('밍견 강등됨','ㅠㅠㅠ 슬픔',400,'1111',curDate(),'김운남');
