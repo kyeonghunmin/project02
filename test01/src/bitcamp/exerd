@@ -28,12 +28,12 @@ DROP TABLE IF EXISTS PJTT RESTRICT;
 -- 프로젝트
 CREATE TABLE PJT (
   PNO   VARCHAR(255) NOT NULL COMMENT '프로젝트번호', -- 프로젝트번호
-  INO2  VARCHAR(255) NULL     COMMENT '팀장', -- 팀장
-  INO   VARCHAR(255) NULL     COMMENT '강사번호', -- 강사번호
+  INOL  VARCHAR(255) NULL     COMMENT '팀장', -- 팀장
+  INOT  VARCHAR(255) NULL     COMMENT '강사번호', -- 강사번호
   TITL  VARCHAR(100) NOT NULL COMMENT '프로젝트명', -- 프로젝트명
   ST_DT DATE         NULL     COMMENT '시작일', -- 시작일
   EN_DT DATE         NULL     COMMENT '종료일', -- 종료일
-  DESCT VARCHAR(255) NULL     COMMENT '설명', -- 설명
+  DES   VARCHAR(255) NULL     COMMENT '설명', -- 설명
   STATE INTEGER(101) NULL     COMMENT '상태', -- 상태
   NUMB  INTEGER      NOT NULL COMMENT '참가인원', -- 참가인원
   SLOG  VARCHAR(255) NULL     COMMENT '팀구호', -- 팀구호
@@ -202,7 +202,7 @@ ALTER TABLE PJT
 ALTER TABLE PJT
   ADD CONSTRAINT FK_TEA_TO_PJT -- 강사 -> 프로젝트
     FOREIGN KEY (
-      INO -- 강사번호
+      INOT -- 강사번호
     )
     REFERENCES TEA ( -- 강사
       INO -- 강사번호
@@ -212,7 +212,7 @@ ALTER TABLE PJT
 ALTER TABLE PJT
   ADD CONSTRAINT FK_STU_TO_PJT -- 학생 -> 프로젝트
     FOREIGN KEY (
-      INO2 -- 팀장
+      INOL -- 팀장
     )
     REFERENCES STU ( -- 학생
       INO -- 학생번호
