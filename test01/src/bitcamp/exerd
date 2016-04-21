@@ -7,12 +7,6 @@ DROP TABLE IF EXISTS STU RESTRICT;
 -- 게시판
 DROP TABLE IF EXISTS BOD RESTRICT;
 
--- 능력치
-DROP TABLE IF EXISTS STAT RESTRICT;
-
--- 프로젝트팀
-DROP TABLE IF EXISTS TEAM RESTRICT;
-
 -- 매니저
 DROP TABLE IF EXISTS MNG RESTRICT;
 
@@ -25,12 +19,6 @@ DROP TABLE IF EXISTS EDU RESTRICT;
 -- 인적정보
 DROP TABLE IF EXISTS ID RESTRICT;
 
--- 배치
-DROP TABLE IF EXISTS APPLY RESTRICT;
-
--- 클래스
-DROP TABLE IF EXISTS CLASS RESTRICT;
-
 -- 이메일
 DROP TABLE IF EXISTS EMAIL RESTRICT;
 
@@ -42,7 +30,6 @@ CREATE TABLE PJT (
   PNO   VARCHAR(255) NOT NULL COMMENT '프로젝트번호', -- 프로젝트번호
   INO2  VARCHAR(255) NULL     COMMENT '팀장', -- 팀장
   INO   VARCHAR(255) NULL     COMMENT '강사번호', -- 강사번호
-  PTNO  VARCHAR(255) NOT NULL COMMENT '프로젝트팀번호', -- 프로젝트팀번호
   TITL  VARCHAR(100) NOT NULL COMMENT '프로젝트명', -- 프로젝트명
   ST_DT DATE         NULL     COMMENT '시작일', -- 시작일
   EN_DT DATE         NULL     COMMENT '종료일', -- 종료일
@@ -64,9 +51,7 @@ ALTER TABLE PJT
 
 -- 학생
 CREATE TABLE STU (
-  INO  VARCHAR(255) NOT NULL COMMENT '학생번호', -- 학생번호
-  PTNO VARCHAR(255) NOT NULL COMMENT '프로젝트팀번호', -- 프로젝트팀번호
-  CNO  VARCHAR(255) NULL     COMMENT '클래스번호' -- 클래스번호
+  INO VARCHAR(255) NOT NULL COMMENT '학생번호' -- 학생번호
 )
 COMMENT '학생';
 
@@ -101,49 +86,6 @@ ALTER TABLE BOD
 CREATE INDEX IX_BOD
   ON BOD( -- 게시판
     CR_DT ASC -- 작성일
-  );
-
--- 능력치
-CREATE TABLE STAT (
-  SNO  VARCHAR(255) NOT NULL COMMENT '능력치번호', -- 능력치번호
-  HANS INTEGER(101) NULL     COMMENT '잘생김', -- 잘생김
-  ATT  INTEGER(101) NULL     COMMENT '매력', -- 매력
-  POW  INTEGER(101) NULL     COMMENT '무력', -- 무력
-  INT  INTEGER(101) NULL     COMMENT '지력', -- 지력
-  KIND INTEGER(101) NULL     COMMENT '친절도', -- 친절도
-  CHA  INTEGER(101) NULL     COMMENT '카리스마', -- 카리스마
-  MON  INTEGER(101) NULL     COMMENT '재력', -- 재력
-  TEAC INTEGER(101) NULL     COMMENT '교육역량', -- 교육역량
-  KNOW INTEGER(101) NULL     COMMENT '지식', -- 지식
-  HUM  INTEGER(101) NULL     COMMENT '인맥' -- 인맥
-)
-COMMENT '능력치';
-
--- 능력치
-ALTER TABLE STAT
-  ADD CONSTRAINT PK_STAT -- 능력치 기본키
-    PRIMARY KEY (
-      SNO -- 능력치번호
-    );
-
--- 프로젝트팀
-CREATE TABLE TEAM (
-  PTNO VARCHAR(255) NOT NULL COMMENT '프로젝트팀번호', -- 프로젝트팀번호
-  PNM  VARCHAR(50)  NOT NULL COMMENT '프로젝트팀명' -- 프로젝트팀명
-)
-COMMENT '프로젝트팀';
-
--- 프로젝트팀
-ALTER TABLE TEAM
-  ADD CONSTRAINT PK_TEAM -- 프로젝트팀 기본키
-    PRIMARY KEY (
-      PTNO -- 프로젝트팀번호
-    );
-
--- 프로젝트팀 인덱스
-CREATE INDEX IX_TEAM
-  ON TEAM( -- 프로젝트팀
-    PNM ASC -- 프로젝트팀명
   );
 
 -- 매니저
@@ -224,41 +166,6 @@ CREATE INDEX IX_ID
     INM ASC -- 이름
   );
 
--- 배치
-CREATE TABLE APPLY (
-  ANO   VARCHAR(255) NOT NULL COMMENT '배치번호', -- 배치번호
-  ENO   VARCHAR(255) NOT NULL COMMENT '교육과정번호', -- 교육과정번호
-  CNO   VARCHAR(255) NULL     COMMENT '클래스번호', -- 클래스번호
-  ST_DT DATE         NULL     COMMENT '시작일', -- 시작일
-  EN_DT DATE         NULL     COMMENT '종료일', -- 종료일
-  CONT  VARCHAR(255) NULL     COMMENT '내용', -- 내용
-  HR    DATE         NULL     COMMENT '시간', -- 시간
-  DUR   DATE         NULL     COMMENT '기간', -- 기간
-  INO   VARCHAR(255) NULL     COMMENT '강사번호', -- 강사번호
-  INO2  VARCHAR(255) NULL     COMMENT '매니저번호' -- 매니저번호
-)
-COMMENT '배치';
-
--- 배치
-ALTER TABLE APPLY
-  ADD CONSTRAINT PK_APPLY -- 배치 기본키
-    PRIMARY KEY (
-      ANO -- 배치번호
-    );
-
--- 클래스
-CREATE TABLE CLASS (
-  CNO VARCHAR(255) NOT NULL COMMENT '클래스번호' -- 클래스번호
-)
-COMMENT '클래스';
-
--- 클래스
-ALTER TABLE CLASS
-  ADD CONSTRAINT PK_CLASS -- 클래스 기본키
-    PRIMARY KEY (
-      CNO -- 클래스번호
-    );
-
 -- 이메일
 CREATE TABLE EMAIL (
   INO VARCHAR(255) NULL COMMENT '인적정보번호', -- 인적정보번호
@@ -279,16 +186,6 @@ ALTER TABLE PJTT
     PRIMARY KEY (
       PNO, -- 프로젝트번호
       INO  -- 학생번호
-    );
-
--- 프로젝트
-ALTER TABLE PJT
-  ADD CONSTRAINT FK_TEAM_TO_PJT -- 프로젝트팀 -> 프로젝트
-    FOREIGN KEY (
-      PTNO -- 프로젝트팀번호
-    )
-    REFERENCES TEAM ( -- 프로젝트팀
-      PTNO -- 프로젝트팀번호
     );
 
 -- 프로젝트
@@ -319,26 +216,6 @@ ALTER TABLE PJT
     )
     REFERENCES STU ( -- 학생
       INO -- 학생번호
-    );
-
--- 학생
-ALTER TABLE STU
-  ADD CONSTRAINT FK_TEAM_TO_STU -- 프로젝트팀 -> 학생
-    FOREIGN KEY (
-      PTNO -- 프로젝트팀번호
-    )
-    REFERENCES TEAM ( -- 프로젝트팀
-      PTNO -- 프로젝트팀번호
-    );
-
--- 학생
-ALTER TABLE STU
-  ADD CONSTRAINT FK_CLASS_TO_STU -- 클래스 -> 학생
-    FOREIGN KEY (
-      CNO -- 클래스번호
-    )
-    REFERENCES CLASS ( -- 클래스
-      CNO -- 클래스번호
     );
 
 -- 학생
@@ -389,46 +266,6 @@ ALTER TABLE EDU
     )
     REFERENCES MNG ( -- 매니저
       INO -- 매니저번호
-    );
-
--- 배치
-ALTER TABLE APPLY
-  ADD CONSTRAINT FK_TEA_TO_APPLY -- 강사 -> 배치
-    FOREIGN KEY (
-      INO -- 강사번호
-    )
-    REFERENCES TEA ( -- 강사
-      INO -- 강사번호
-    );
-
--- 배치
-ALTER TABLE APPLY
-  ADD CONSTRAINT FK_EDU_TO_APPLY -- 교육과정 -> 배치
-    FOREIGN KEY (
-      ENO -- 교육과정번호
-    )
-    REFERENCES EDU ( -- 교육과정
-      ENO -- 교육과정번호
-    );
-
--- 배치
-ALTER TABLE APPLY
-  ADD CONSTRAINT FK_MNG_TO_APPLY -- 매니저 -> 배치
-    FOREIGN KEY (
-      INO2 -- 매니저번호
-    )
-    REFERENCES MNG ( -- 매니저
-      INO -- 매니저번호
-    );
-
--- 배치
-ALTER TABLE APPLY
-  ADD CONSTRAINT FK_CLASS_TO_APPLY -- 클래스 -> 배치
-    FOREIGN KEY (
-      CNO -- 클래스번호
-    )
-    REFERENCES CLASS ( -- 클래스
-      CNO -- 클래스번호
     );
 
 -- 이메일
