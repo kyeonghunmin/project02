@@ -10,11 +10,9 @@ public class Member {
   protected String password;
   protected String email;
   
-
+public Member() {}
   
-public Member(int ino, String name, int age, boolean gender, String tel, String step, String password, String email) {
-	super();
-	this.ino = ino;
+public Member(String name, int age, boolean gender, String tel, String step, String password, String email) {
 	this.name = name;
 	this.age = age;
 	this.gender = gender;

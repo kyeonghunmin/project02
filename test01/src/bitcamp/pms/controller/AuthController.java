@@ -34,7 +34,7 @@ public class AuthController {
     if (CommandUtil.confirm(keyScan, "정말 탈퇴하시겠습니까?")) {
       try {
         Member loginUser = (Member)se.getAttribute("loginUser");
-        memberDao.delete(loginUser.getNo());
+        memberDao.delete(loginUser.getIno());
         System.out.println("회원 정보를 삭제하였습니다. 안녕히 가세요.");
       } catch (Exception e) {
         System.out.println("데이터를 저장하는데 실패했습니다.");

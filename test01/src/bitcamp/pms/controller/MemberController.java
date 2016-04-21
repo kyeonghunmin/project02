@@ -25,14 +25,29 @@ public class MemberController {
     System.out.print("이름? ");
     member.setName(keyScan.nextLine());
 
+    System.out.print("나이? ");
+    member.setAge(Integer.parseInt(keyScan.nextLine()));
+    
+    System.out.print("성별(남자:1, 여자:2)? ");
+    String input = keyScan.nextLine();
+    if (input.equals("1")) {
+    	member.setGender(true);
+    } else if (input.equals("2")){
+    	member.setGender(false);
+    }
+        
+    System.out.print("전화? ");
+    member.setTel(keyScan.nextLine());
+
+    System.out.print("학력? ");
+    member.setStep(keyScan.nextLine());
+    
+    System.out.print("암호? ");
+    member.setPassword(keyScan.nextLine());
+    
     System.out.print("이메일? ");
     member.setEmail(keyScan.nextLine());
 
-    System.out.print("암호? ");
-    member.setPassword(keyScan.nextLine());
-
-    System.out.print("전화? ");
-    member.setTel(keyScan.nextLine());
 
     if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
       try {
@@ -74,7 +89,7 @@ public class MemberController {
       List<Member> members = memberDao.selectList();
       
       for (Member member : members) {
-        System.out.printf("%d, %s, %s, %s\n", member.getNo(),
+        System.out.printf("%d, %s, %s, %s\n", member.getIno(),
             member.getName(), member.getEmail(), member.getTel());
       }
     } catch (Exception e) {
@@ -96,16 +111,37 @@ public class MemberController {
       
       System.out.printf("이름(%s)? ", member.getName());
       member.setName(keyScan.nextLine());
-  
-      System.out.printf("이메일(%s)? ", member.getEmail());
-      member.setEmail(keyScan.nextLine());
-  
-      System.out.printf("암호(%s)? ", member.getPassword());
-      member.setPassword(keyScan.nextLine());
-  
+
+      System.out.printf("나이(%d)? ", member.getAge());
+      member.setAge(Integer.parseInt(keyScan.nextLine()));
+      
+      String gender = null;
+      if (member.isGender()) {
+    	  gender = "남자";
+      } else if (!member.isGender()) {
+    	  gender = "여자";
+      }
+      System.out.printf("성별(남자:1, 여자:2)(%s)? ", gender);
+      String input = keyScan.nextLine();
+      if (input.equals("1")) {
+      	member.setGender(true);
+      } else if (input.equals("2")){
+      	member.setGender(false);
+      }
+          
       System.out.printf("전화(%s)? ", member.getTel());
       member.setTel(keyScan.nextLine());
-  
+
+      System.out.printf("학력(%s)? ", member.getStep());
+      member.setStep(keyScan.nextLine());
+      
+      System.out.printf("암호(%s)? ", member.getPassword());
+      member.setPassword(keyScan.nextLine());
+      
+      System.out.printf("이메일(%s)? ", member.getEmail());
+      member.setEmail(keyScan.nextLine());
+      
+      
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
         int count = memberDao.update(member);
         if (count > 0) {
