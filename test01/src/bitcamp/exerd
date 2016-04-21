@@ -138,13 +138,14 @@ CREATE INDEX IX_EDU
 
 -- 인적정보
 CREATE TABLE ID (
-  INO  VARCHAR(255) NOT NULL COMMENT '인적정보번호', -- 인적정보번호
-  INM  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
-  AGE  INTEGER      NULL     COMMENT '나이', -- 나이
-  GEND CHAR(1)      NULL     COMMENT '성별', -- 성별
-  TEL  VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
-  STEP VARCHAR(100) NULL     COMMENT '학력', -- 학력
-  PASS VARCHAR(100) NOT NULL COMMENT '암호' -- 암호
+  INO   VARCHAR(255) NOT NULL COMMENT '인적정보번호', -- 인적정보번호
+  INM   VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  AGE   INTEGER      NULL     COMMENT '나이', -- 나이
+  GEND  CHAR(1)      NULL     COMMENT '성별', -- 성별
+  TEL   VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
+  STEP  VARCHAR(100) NULL     COMMENT '학력', -- 학력
+  PASS  VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+  EMAIL VARCHAR(100) NOT NULL COMMENT '이메일' -- 이메일
 )
 COMMENT '인적정보';
 
@@ -168,8 +169,7 @@ CREATE INDEX IX_ID
 
 -- 이메일
 CREATE TABLE EMAIL (
-  INO VARCHAR(255) NULL COMMENT '인적정보번호', -- 인적정보번호
-  COL VARCHAR(100) NULL COMMENT '이메일' -- 이메일
+  INO VARCHAR(255) NULL COMMENT '인적정보번호' -- 인적정보번호
 )
 COMMENT '이메일';
 
