@@ -1,9 +1,10 @@
 package bitcamp;
 
-public class Test01 {
+public class Test001 {
 
 	public static void main(String[] args) {
-		System.out.println("아아");
+		System.out.println("아아아");
+
 	}
 
 }
