@@ -104,10 +104,12 @@ public class MemberController {
       int no = Integer.parseInt(keyScan.nextLine());
   
       Member member = memberDao.selectOne(no);
+      System.out.println("오류오류");
       if (member == null) {
         System.out.println("유효하지 않은 번호입니다.");
         return;
       }
+      
       
       System.out.printf("이름(%s)? ", member.getName());
       member.setName(keyScan.nextLine());
