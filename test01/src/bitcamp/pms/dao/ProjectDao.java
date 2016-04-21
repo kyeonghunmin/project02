@@ -1,134 +1,93 @@
 package bitcamp.pms.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import bitcamp.pms.annotation.Component;
+import bitcamp.pms.domain.Project;
 
 @Component
 public class ProjectDao {
-/*
+  SqlSessionFactory sqlSessionFactory;
   
+  public ProjectDao() {}
+  
+  public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+    this.sqlSessionFactory = sqlSessionFactory;
+  }
+
   public List<Project> selectList() throws Exception {
-    ArrayList<Project> list = new ArrayList<>();
-    
-    Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      con = dataSource.getConnection();
-      stmt = con.createStatement();
-      rs = stmt.executeQuery("select * from PROJECTS");
-      Project project = null;
-      
-      while (rs.next()) { 
-        project = new Project();
-        project.setNo(rs.getInt("PNO"));
-        project.setTitle(rs.getString("TITLE"));
-        project.setStartDate(rs.getDate("SDT"));
-        project.setEndDate(rs.getDate("EDT"));
-        project.setState(rs.getInt("STAT"));
-        project.setDescription(rs.getString("DESCT"));
-        list.add(project);
-      }
-      return list;
-    
+      return sqlSession.selectList("ProjectDao.selectList");
     } finally {
-      try {rs.close();} catch (Exception e) {}
-      try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
+      sqlSession.close();
     }
   }
   
   public Project selectOne(int no) throws Exception {
-    Connection con = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      con = dataSource.getConnection();
-      stmt = con.prepareStatement("select * from PROJECTS where PNO=?");
-      stmt.setInt(1, no);
-      rs = stmt.executeQuery();
+      HashMap<String,Object> paramMap = new HashMap<>();
+      paramMap.put("pno", no);
       
-      if (rs.next()) { 
-        Project project = new Project();
-        project.setNo(rs.getInt("PNO"));
-        project.setTitle(rs.getString("TITLE"));
-        project.setStartDate(rs.getDate("SDT"));
-        project.setEndDate(rs.getDate("EDT"));
-        project.setState(rs.getInt("STAT"));
-        project.setDescription(rs.getString("DESCT"));
-        return project;
-      }
-      
-      return null;
-    
+      return sqlSession.selectOne("ProjectDao.selectOne", paramMap);
     } finally {
-      try {rs.close();} catch (Exception e) {}
-      try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
+      sqlSession.close();
     }
-  }
+  } 
   
   public int insert(Project project) throws Exception {
-    Connection con = null;
-    PreparedStatement stmt = null;
+    SqlSession sqlSession = sqlSessionFactory.openSession(true);
     
     try {
-      con = dataSource.getConnection();
-      stmt = con.prepareStatement(
-          "insert into PROJECTS(TITLE,SDT,EDT,DESCT) values(?,?,?,?)");
-
-      stmt.setString(1, project.getTitle());
-      stmt.setDate(2, project.getStartDate());
-      stmt.setDate(3, project.getEndDate());
-      stmt.setString(4, project.getDescription());
-      
-      return stmt.executeUpdate();
+      return sqlSession.insert("ProjectDao.insert", project);
       
     } finally {
-      try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
+      sqlSession.close();
     }
   }
   
   public int update(Project project) throws Exception {
-    Connection con = null;
-    PreparedStatement stmt = null;
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      con = dataSource.getConnection();
-      stmt = con.prepareStatement(
-          "update PROJECTS set TITLE=?, SDT=?, EDT=?, DESCT=?, STAT=? where PNO=?");
-
-      stmt.setString(1, project.getTitle());
-      stmt.setDate(2, project.getStartDate());
-      stmt.setDate(3, project.getEndDate());
-      stmt.setString(4, project.getDescription());
-      stmt.setInt(5, project.getState());
-      stmt.setInt(6, project.getNo());
-      
-      return stmt.executeUpdate();
+      int count = sqlSession.update("ProjectDao.update", project);
+      sqlSession.commit();
+      return count;
       
     } finally {
-      try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
+      sqlSession.close();
     }
   }
   
   public int delete(int no) throws Exception {
-    Connection con = null;
-    PreparedStatement stmt = null;
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      con = dataSource.getConnection();
-      stmt = con.prepareStatement("delete from PROJECTS where PNO=?");
-      stmt.setInt(1, no);
-      return stmt.executeUpdate();
+      int count = sqlSession.delete("ProjectDao.delete", no);
+      sqlSession.commit();
+      return count;
       
     } finally {
-      try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
+      sqlSession.close();
     }
   }
-*/
+
 }
+
+
+
+
+
+
+
+
+
+
+
