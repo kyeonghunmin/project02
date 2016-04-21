@@ -4,7 +4,7 @@ public class Member {
   protected int    ino;
   protected String name;
   protected int age;
-  protected boolean gender;
+  protected String gender;
   protected String tel;
   protected String step;
   protected String password;
@@ -12,7 +12,7 @@ public class Member {
   
 public Member() {}
   
-public Member(String name, int age, boolean gender, String tel, String step, String password, String email) {
+public Member(String name, int age, String gender, String tel, String step, String password, String email) {
 	this.name = name;
 	this.age = age;
 	this.gender = gender;
@@ -46,12 +46,14 @@ public int getAge() {
 public void setAge(int age) {
 	this.age = age;
 }
-public boolean isGender() {
+public String getGender() {
 	return gender;
 }
-public void setGender(boolean gender) {
+
+public void setGender(String gender) {
 	this.gender = gender;
 }
+
 public String getTel() {
 	return tel;
 }

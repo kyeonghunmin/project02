@@ -28,12 +28,12 @@ public class MemberController {
     System.out.print("나이? ");
     member.setAge(Integer.parseInt(keyScan.nextLine()));
     
-    System.out.print("성별(남자:1, 여자:2)? ");
+    System.out.print("성별(남자, 여자)? ");
     String input = keyScan.nextLine();
-    if (input.equals("1")) {
-    	member.setGender(true);
-    } else if (input.equals("2")){
-    	member.setGender(false);
+    if (input.equals("남자")) {
+    	member.setGender("남자");
+    } else if (input.equals("여자")){
+    	member.setGender("여자");
     }
         
     System.out.print("전화? ");
@@ -115,18 +115,12 @@ public class MemberController {
       System.out.printf("나이(%d)? ", member.getAge());
       member.setAge(Integer.parseInt(keyScan.nextLine()));
       
-      String gender = null;
-      if (member.isGender()) {
-    	  gender = "남자";
-      } else if (!member.isGender()) {
-    	  gender = "여자";
-      }
-      System.out.printf("성별(남자:1, 여자:2)(%s)? ", gender);
+      System.out.printf("성별(남자:1, 여자:2)(%s)? ", member.getGender());
       String input = keyScan.nextLine();
-      if (input.equals("1")) {
-      	member.setGender(true);
-      } else if (input.equals("2")){
-      	member.setGender(false);
+      if (input.equals("남자")) {
+      	member.setGender("남자");
+      } else if (input.equals("여자")){
+      	member.setGender("여자");
       }
           
       System.out.printf("전화(%s)? ", member.getTel());

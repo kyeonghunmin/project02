@@ -76,6 +76,10 @@ public class AuthController {
     System.out.print("이름: ");
     member.setName(keyScan.nextLine());
     
+    member.setAge(0);
+    member.setGender(null);
+    member.setStep(null);
+    
     String value = null;
     while (true) {
       System.out.print("이메일: ");
@@ -85,6 +89,8 @@ public class AuthController {
       System.out.println("이메일 형식에 맞지 않습니다. 예) aaa.aaa@bbb.com");
     }
     member.setEmail(value);
+    
+    
     
     String regex = null;
     Pattern pattern = null;
