@@ -34,7 +34,7 @@ public class MemberDao {
     
     try {
       HashMap<String,Object> paramMap = new HashMap<>();
-      paramMap.put("no", no);
+      paramMap.put("ino", no);
       
       return sqlSession.selectOne("MemberDao.selectOne", paramMap);
     } finally {
